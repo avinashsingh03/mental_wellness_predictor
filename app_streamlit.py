@@ -245,7 +245,8 @@ if st.button("🔮 Predict Mental Wellness Index", use_container_width=True):
                     padding:15px;
                     border-radius:12px;
                     box-shadow:0 4px 6px rgba(0,0,0,0.1);'>
-            <h4 style='color:#333;'>Status: {status}</h4>
+            <h4 style='color:#111;'>Status: {status}</h4>
+            <ul style='color:#222; font-size:16px;'>
             <ul>
                 {''.join([f"<li style='margin:8px 0; font-size:16px;'>{s}</li>" for s in suggestions])}
             </ul>
