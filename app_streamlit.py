@@ -136,9 +136,9 @@ with col2:
     sleep_hours = st.number_input("Sleep Hours", min_value=0.0, max_value=24.0, value=7.0, step=0.25)
 
 # Sliders (customization 1)
-sleep_quality = st.slider("Sleep Quality (1-5)", min_value=1, max_value=5, value=3)
-stress_level = st.slider("Stress Level (0-10)", min_value=0, max_value=10, value=5)
-productivity = st.slider("Productivity (0-100)", min_value=0, max_value=100, value=50)
+sleep_quality = st.slider("Sleep Quality (Worst:1 - Best:5)", min_value=1, max_value=5, value=3)
+stress_level = st.slider("Stress Level (Unstressed:0 - Stressed:10)", min_value=0, max_value=10, value=5)
+productivity = st.slider("Productivity (Null:0 - Max:100)", min_value=0, max_value=100, value=50)
 
 # More inputs
 exercise_minutes = st.number_input("Exercise Minutes per Week", min_value=0, max_value=1000, value=120, step=10)
@@ -147,7 +147,7 @@ social_hours = st.number_input("Social Hours per Week", min_value=0.0, max_value
 # ----------------------------
 # Prediction Button
 # ----------------------------
-if st.button("🔮 Predict Mental Wellness Index", use_container_width=True):
+if st.button("Predict Mental Wellness Index", use_container_width=True):
     input_data = [[
         age, gender, occupation, work_mode,
         total_screen_time, work_screen_hours, leisure_screen_hours,
