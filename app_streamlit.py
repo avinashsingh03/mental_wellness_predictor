@@ -188,9 +188,44 @@ if st.button("🔮 Predict Mental Wellness Index", use_container_width=True):
             return "🙂 Healthy (Good balance, manageable stress, positive habits)", "lightgreen"
         else:
             return "🌟 Mentally Fit (Strong resilience, high wellness, thriving)", "green"
+            
+    def get_suggestions(status):
+        if status == "🚨 Not Fit (Severe imbalance, needs urgent attention)":
+            return [
+                "🧑‍⚕️ Seek professional mental health support.",
+                "🛌 Reduce screen time and prioritize 7–8 hours of sleep.",
+                "📝 Start with small habits: walking, journaling, meditation.",
+                "🤝 Stay connected with supportive friends/family."
+            ], "#ffe6e6"  # light red background
+        elif status == "⚠️ Vulnerable (Struggling, high stress & low resilience)":
+            return [
+                "🛌 Maintain a fixed sleep routine.",
+                "📴 Limit unnecessary screen use (e.g., social media).",
+                "🧘 Practice stress relief: yoga, breathing, mindfulness.",
+                "🏃 Exercise at least 20–30 minutes daily."
+            ], "#fff5e6"  # light orange background
+        elif status == "😐 Moderate (Average wellness, could improve with lifestyle balance)":
+            return [
+                "⚖️ Balance work vs. leisure screen hours.",
+                "🎭 Increase social interaction and hobbies.",
+                "📊 Track sleep, exercise, and diet consistency.",
+                "🎯 Set small weekly improvement goals."
+            ], "#ffffe6"  # light yellow background
+        elif status == "🙂 Healthy (Good balance, manageable stress, positive habits)":
+            return [
+                "🥗 Keep exercising and eating balanced meals.",
+                "🧘 Continue mindfulness/stress management routines.",
+                "⏰ Stick to a consistent sleep schedule.",
+                "🚀 Avoid overworking and burnout."
+            ], "#e6ffe6"  # light green background
+        else:  # 🌟 Mentally Fit
+            return [
+                "🌱 Maintain healthy habits — don't get complacent.",
+                "🤝 Support others with wellness advice.",
+                "📖 Try advanced practices: gratitude journaling, digital detox.",
+                "🧘 Explore mindfulness retreats or volunteering."
+            ], "#e6f7ff"  # light blue background
 
-
-    status, color = get_status(prediction)
 
     # NEW: add status + gauge
     status, color = get_status(prediction)
@@ -198,6 +233,27 @@ if st.button("🔮 Predict Mental Wellness Index", use_container_width=True):
     st.success(f"🎯 Your Predicted Mental Wellness Index: **{prediction:.2f} / 100**")
     st.markdown(f"**Wellness Status:** <span style='color:{color}; font-weight:bold;'>{status}</span>", unsafe_allow_html=True)
 
+    suggestions, bg_color = get_suggestions(status)
+
+    st.markdown("---")
+    st.subheader("💡 Personalized Suggestions")
+
+    # Card Style Box with Dynamic Color
+    st.markdown(
+        f"""
+        <div style='background-color:{bg_color};
+                    padding:15px;
+                    border-radius:12px;
+                    box-shadow:0 4px 6px rgba(0,0,0,0.1);'>
+            <h4 style='color:#333;'>Status: {status}</h4>
+            <ul>
+                {''.join([f"<li style='margin:8px 0; font-size:16px;'>{s}</li>" for s in suggestions])}
+            </ul>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    
     # Gauge Chart
     fig = go.Figure(go.Indicator(
         mode = "gauge+number",
